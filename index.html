@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CobayCraft | Servidor de Minecraft</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- VARIABLES DE COLOR (Inspiradas en tu logo) --- */
+        :root {
+            --bg-dark: #12161a;
+            --bg-card: #1a2229;
+            --mc-green: #4caf50;
+            --mc-green-hover: #388e3c;
+            --mc-gold: #ffca28;
+            --mc-gold-hover: #ffb300;
+            --mc-diamond: #00e5ff;
+            --text-light: #f5f6fa;
+            --text-muted: #a4b0be;
+            --border-pixel: 4px solid #000;
+        }
+
+        /* --- CONFIGURACIÓN GENERAL --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-light);
+            
+            background: 
+                radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%),
+                url('fondo.png'); 
+            
+            /* --- AQUÍ ES DONDE LO CAMBIAS --- */
+            background-size: 100% auto;       
+            
+            background-repeat: no-repeat; 
+            background-position: center;  
+            
+            background-attachment: fixed; 
+            overflow-x: hidden;
+        }
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            background-image: 
+                linear-gradient(rgba(18, 22, 26, 0.85), rgba(18, 22, 26, 0.95)),
+                url('https://www.transparenttextures.com/patterns/dark-matter.png'); /* Textura sutil */
+            overflow-x: hidden;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .logo-placeholder {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 20px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--mc-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-placeholder:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            border-radius: 17px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2.2rem;
+            color: var(--mc-gold);
+            text-shadow: 4px 4px 0px #000;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* --- BOTONES ESTILO MINECRAFT / PREMIUM --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-download {
+            background-color: var(--mc-green);
+            border-bottom: 5px solid #2e7d32;
+        }
+
+        .btn-download:hover {
+            background-color: var(--mc-green-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-download:active {
+            transform: translateY(2px);
+            border-bottom-width: 1px;
+        }
+
+        /* --- SECCIÓN CONEXIÓN (IP) --- */
+        .ip-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin: 40px 0;
+            border: 2px solid #2c3e50;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .ip-section h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            color: var(--mc-diamond);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .ip-container {
+            display: inline-flex;
+            align-items: center;
+            background: #0f1318;
+            padding: 12px 25px;
+            border-radius: 10px;
+            border: 1px solid #34495e;
+            max-width: 100%;
+        }
+
+        .ip-text {
+            font-family: monospace;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-right: 20px;
+            letter-spacing: 1px;
+            word-break: break-all;
+        }
+
+        .btn-copy {
+            background: none;
+            border: none;
+            color: var(--mc-gold);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+        }
+
+        .btn-copy:hover {
+            color: #fff;
+        }
+
+        /* --- TARJETAS DE CARACTERÍSTICAS --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 5px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border-top: 4px solid var(--mc-gold);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--mc-diamond);
+            margin-bottom: 15px;
+        }
+
+        .card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #2c3e50;
+        }
+
+        /* --- NOTIFICACIÓN FLOTANTE --- */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--mc-green);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo-placeholder">
+                <img src="WhatsApp Image 2026-05-17 at 10.45.30 AM.jpeg" alt="CobayCraft Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-solid fa-cubes\' style=\'font-size: 5rem; color: var(--mc-gold);\'></i>'">
+            </div>
+            <h1>COBAYCRAFT</h1>
+            <p class="subtitle">¡Prepara tus herramientas y únete a la aventura con la comunidad!</p>
+            
+            <a href="https://www.mediafire.com/file/hhd4soy8ja45zy3/mod_server_aternos.rar/file" target="_blank" class="btn btn-download">
+                <i class="fa-solid fa-download"></i> Descargar Modpack (MediaFire)
+            </a>
+        </header>
+
+        <section class="ip-section">
+            <h3>DIRECCIÓN DEL SERVIDOR</h3>
+            <div class="ip-container">
+                <span class="ip-text" id="serverIp">cobayserveryuc.aternos.me</span>
+                <button class="btn-copy" onclick="copyIp()" title="Copiar IP">
+                    <i class="fa-regular fa-copy" id="copyIcon"></i>
+                </button>
+            </div>
+            <p style="margin-top: 10px; color: var(--text-muted); font-size: 0.9rem;">Haz clic en el icono para copiar la dirección directamente en tu portapapeles.</p>
+        </section>
+
+        <main class="features-grid">
+            <div class="card">
+                <i class="fa-solid fa-gears"></i>
+                <h4>Modpack Optimizado</h4>
+                <p>Colección de mods seleccionados cuidadosamente para asegurar la mejor experiencia técnica y de exploración sin perder rendimiento.</p>
+            </div>
+
+            <div class="card" style="border-top-color: var(--mc-diamond);">
+                <i class="fa-solid fa-users"></i>
+                <h4>Comunidad Activa</h4>
+                <p>Un espacio ideal para jugar con amigos, crear facciones, construir reinos épicos y compartir momentos únicos en el servidor.</p>
+            </div>
+
+            <div class="card" style="border-top-color: var(--mc-green);">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h4>Supervivencia 24/7</h4>
+                <p>Gestión a través de Aternos estable, listo para ser encendido por la comunidad para tus tardes de juego continuo.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 CobayCraft Server. Hecho para la comunidad de Minecraft.</p>
+        </footer>
+    </div>
+
+    <div class="toast" id="toast">¡IP Copiada exitosamente!</div>
+
+    <script>
+        function copyIp() {
+            const ipText = document.getElementById('serverIp').innerText;
+            const icon = document.getElementById('copyIcon');
+            const toast = document.getElementById('toast');
+
+            // Copiar al portapapeles
+            navigator.clipboard.writeText(ipText).then(() => {
+                // Cambiar icono temporalmente
+                icon.className = "fa-solid fa-check";
+                icon.style.color = "var(--mc-green)";
+                
+                // Mostrar notificación
+                toast.style.display = "block";
+
+                // Resetear después de 2.5 segundos
+                setTimeout(() => {
+                    icon.className = "fa-regular fa-copy";
+                    icon.style.color = "var(--mc-gold)";
+                    toast.style.display = "none";
+                }, 2500);
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
